@@ -13,7 +13,9 @@ Gem::Specification.new do |spec|
   spec.license       = 'MIT'
   spec.required_ruby_version = '>=2.1.0'
 
-  spec.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
+  spec.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR).reject do |f|
+    f.match(%r{^(test|spec|features|examples?)/})
+  end
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
